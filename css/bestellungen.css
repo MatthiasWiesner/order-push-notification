@@ -1,0 +1,39 @@
+button {
+    border: 1px solid #ccc !important;
+    margin-right: 3px;
+}
+
+dd {
+    margin-left:30px;
+}
+#customRecipe {
+    margin-top: 20px;
+}
+#recipeCount {
+    margin-left: 5px;
+    width: 80px;
+}
+#recipeTitle  {
+    width: 500px;
+}
+#recipeTitle, #recipeCount {
+    display: block;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+hr.orderEnd {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid red;
+    margin: 1em 0;
+    padding: 0; 
+}

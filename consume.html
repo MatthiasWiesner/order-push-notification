@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+    <head>
+    <title>Bestellungen</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/bestellungen.css">
+        <link rel="stylesheet" href="css/awesomplete.css">
+        <script src="./js/mqttws31.js" type="text/javascript"></script>
+        <script src="./js/jquery.min.js" type="text/javascript"></script>
+        <!-- <script src="./js/ion.sound.min.js" type="text/javascript"></script> -->
+        <script src="./js/howler.min.js" type="text/javascript"></script>
+        <script src="./js/awesomplete.min.js" type="text/javascript"></script>
+
+        <script src="./js/mustache.min.js" type="text/javascript"></script>
+        <script src="./js/data.js" type="text/javascript"></script>
+        <script src="./js/bestellung.js" type="text/javascript"></script>
+        <script>
+            $(document).ready(function(){
+                var consumer = new Consumer();
+                var broker = new Broker('159.69.8.19', 9001, 'bestellungen', 'consumer', consumer.displayOrders);
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div id="orderList" class="row"></div>
+        </div>
+    </body>
+    <script id="order-template" type="x-tmpl-mustache">
+        <dl class="table" data-order-id={{ id }}>
+            <dt>Tisch</dt>
+            <dd class="orderTable"></dd>
+            <dt>Getränke</dt>
+            <dd>
+                <table class="table table-hover orderList">
+                    <tbody></tbody>
+                </table>
+            </dd>
+            <dt><button type="button" class="btn btn-light btn-sm order-ready">Fertig</button></dt>
+            <hr/ class="orderEnd">
+        </dl>
+    </script>
+</html>

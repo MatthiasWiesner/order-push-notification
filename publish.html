@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+    <head>
+    <title>Bestellungen</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/bestellungen.css">
+        <script src="./js/mqttws31.js" type="text/javascript"></script>
+        <script src="./js/jquery.min.js"></script>
+        <script src="./js/mustache.min.js"></script>
+        <script src="./js/data.js"></script>
+        <script src="./js/bestellung.js"></script>
+        <script type="text/javascript">
+                $(document).ready(function(){
+                    var broker = new Broker('159.69.8.19', 9001, 'bestellungen', 'publisher');
+                    var publisher = new Publisher(broker);
+                    publisher.initRecipesTables();
+                });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div id="tableList" class="row"></div>
+            <div id="recipeList" class="row"></div>
+            <div id="customRecipe" class="row">
+                <input id="recipeTitle" class="awesomplete" list="hiddenRecipes">
+                <input id="recipeCount" class="" placeholder="1">
+                <button id="customRecipeAdd" type="button" class="btn btn-light">+</button>
+                <datalist id="hiddenRecipes"></datalist>
+            </div>
+            <hr/>
+            <div id="currentOrder"></div>
+            <div class="row">
+                <button id="sendOrder" type="button" class="btn btn-light">Send</button>
+            </div>
+        </div>
+    </body>
+    
+    <script id="recipe-template" type="x-tmpl-mustache">
+        <button type="button" class="btn btn-light add-recipe" data-recipe-title="{{ title }}">{{ title }}</button>
+    </script>
+    <script id="table-template" type="x-tmpl-mustache">
+        <button type="button" class="btn btn-light add-table" data-table-title="{{ title }}">{{ title }}</button>
+    </script>
+    <script id="count-increase-template" type="x-tmpl-mustache">
+        <button type="button" class="btn btn-light btn-sm count-increase" data-recipe-title="{{ title }}">+</button>
+    </script>
+    <script id="count-decrease-template" type="x-tmpl-mustache">
+        <button type="button" class="btn btn-light btn-sm count-decrease" data-recipe-title="{{ title }}">-</button>
+    </script>
+
+    <script id="order-template" type="x-tmpl-mustache">
+        <dl>
+            <dt class="table">Tisch</dt>
+            <dd class="table"></dd>
+            <dt class="recipes">Getränke</dt>
+            <dd class="recipes">
+                <table id="orderList" class="table table-hover">
+                    <tbody></tbody>
+                </table>
+            </dd>
+        </dl>
+    </script>
+</html>
